@@ -1,11 +1,13 @@
 public class Converter {
+    double rateDistance;
+    double rateCalories;
 
-    double setDistance() {
-        double distance = 0.00075;
-        return distance;
+    Converter (double distance, double calories) {
+        rateDistance = distance;
+        rateCalories = calories;
     }
-    double setCalories() {
-        double calories = 0.05;
-        return calories;
+    void convert(double allSteps) {
+        System.out.println("Пройденная дистанция: "+ (allSteps * rateDistance) +" км.");
+        System.out.println("Количество сожжённых килокалорий: "+ (allSteps * rateCalories) +" кКал.");
     }
 }

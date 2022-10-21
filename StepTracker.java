@@ -1,51 +1,44 @@
 public class StepTracker {
     int[][] days = new int[12][30];
-    Converter converter = new Converter();
 
     public void saveSteps(int month, int day, int steps) {
-        days[month][day - 1] = steps;
+        days[month][day-1] = steps;
     }
-    void getSteps(int month) { //Выводит шаги по дням
-        for (int i = 0; i < days[month].length; i++) {
+    void getSteps(int month) { //Возвращает шаги по дням
+        for (int i = 0; i < 29; i++) {
             System.out.print((i + 1) +" день: " + days[month][i] + " шагов, ");
         }
+        System.out.println("30 день: " + days[month][29] + " шагов. ");
     }
-    int allSteps (int month) { //Выводит общее количество шагов
+    int allSteps (int month) { //Возвращает общее количество шагов
         int sumStep = 0;
-        for (int i = 0; i < days[month].length; i++) {
+        for (int i = 0; i < 30; i++) {
             sumStep = sumStep + days[month][i];
         }
         return sumStep;
     }
-    int maxSteps(int month) { //Выводит максимальное количестко щагов
+    int maxSteps(int month) { //Возвращает максимальное количестко щагов
         int maxSteps = 0;
-        for (int i = 0; i < days[month].length; i++) {
+        for (int i = 0; i < 30; i++) {
             if (days[month][i] > maxSteps) {
                 maxSteps = days[month][i];
             }
         }
         return maxSteps;
     }
-    void distance (int month) {
-        double distance = allSteps(month) * converter.setDistance();
-        System.out.println("Пройденная дистанция:"+ distance +" км.");
-    }
-    void calories (int month) {
-        double calories = allSteps(month) * converter.setCalories();
-        System.out.println("Количество сожжённых килокалорий: "+ calories +" кКал.");
-    }
     void bestSeries (int month, int goalStep) {
         int bestSeries = 0;
         int series = 0;
-        for (int i = 0; i < days[month].length; i++) {
+        for (int i = 0; i < 30; i++) {
             if (days[month][i] >= goalStep) {
                 series = series + 1;
-            } else if (days[month][i] < goalStep) {
-                if (series > bestSeries) {
-                    bestSeries = series;
-                    series = 0;
-                }
+            } else {
+                bestSeries = series;
             }
+        }
+        if (series > bestSeries) {
+            bestSeries = series;
+            series = 0;
         }
         System.out.println("Лучшая серия: "+ bestSeries);
     }
